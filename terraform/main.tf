@@ -21,14 +21,14 @@ resource "aws_lambda_function" "default" {
 
   environment {
     variables = {
-      BACKEND_URL = var.backend_url
-      BACKEND_KEY = var.backend_key
+      DYNAMO_REGION = var.region
+      DYNAMO_TABLE  = local.dynamo_table_name
     }
   }
 
   tags = {
     Name = local.function_name
-    app  = "movie-map.alexa.gonzalohirsch.com"
+    app  = local.app_tag
   }
 }
 
@@ -37,7 +37,7 @@ resource "aws_cloudwatch_log_group" "default" {
   retention_in_days = 90
   tags = {
     Name = "/aws/lambda/${local.function_name}"
-    app  = "movie-map.alexa.gonzalohirsch.com"
+    app  = local.app_tag
   }
 }
 

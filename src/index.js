@@ -1,26 +1,34 @@
 const Alexa = require('ask-sdk-core');
 const {
-  AskStreamLocationIntentHandler,
-  AskRentLocationIntentHandler,
-  AskBuyLocationIntentHandler,
-  AskRandomMovieIntentHandler,
   LaunchRequestHandler,
   HelpIntentHandler,
   CancelAndStopIntentHandler,
   SessionEndedRequestHandler,
-  ErrorHandler
+  ErrorHandler,
+  // Custom intents
+  AskListPlantsIntentHandler,
+  AskCreatePlantIntentHandler,
+  AskDeletePlantIntentHandler,
+  AskWaterPlantIntentHandler,
+  AskCheckWaterSpecificPlantIntentHandler,
+  AskCheckWaterPlantsTodayIntentHandler,
+  AskUpdatePlantScheduleIntentHandler
 } = require('./handlers');
 
 exports.handler = Alexa.SkillBuilders.custom()
   .addRequestHandlers(
-    AskStreamLocationIntentHandler,
-    AskRentLocationIntentHandler,
-    AskBuyLocationIntentHandler,
-    AskRandomMovieIntentHandler,
     LaunchRequestHandler,
     HelpIntentHandler,
     CancelAndStopIntentHandler,
-    SessionEndedRequestHandler
+    SessionEndedRequestHandler,
+    // Custom handlers
+    AskListPlantsIntentHandler,
+    AskCreatePlantIntentHandler,
+    AskDeletePlantIntentHandler,
+    AskWaterPlantIntentHandler,
+    AskCheckWaterSpecificPlantIntentHandler,
+    AskCheckWaterPlantsTodayIntentHandler,
+    AskUpdatePlantScheduleIntentHandler
   )
   .addErrorHandlers(ErrorHandler)
   .withApiClient(new Alexa.DefaultApiClient())

@@ -1,15 +1,21 @@
 // Exports some constants and abstracts them from the environment variables as well.
 module.exports = {
+  STORAGE: {
+    TABLE_NAME: process.env.DYNAMO_TABLE,
+    REGION: process.env.DYNAMO_REGION
+  },
   SLOTS: {
-    MOVIE_NAME: 'movie_name'
+    PLANT_NAME: 'plantName',
+    WATER_SCHEDULE: 'waterSchedule',
+    CONFIRMATION: 'confirmation'
   },
-  API: {
-    URL: process.env.BACKEND_URL,
-    KEY: process.env.BACKEND_KEY
-  },
-  ACTIONS: {
-    STREAM: 'STREAM',
-    BUY: 'BUY',
-    RENT: 'RENT'
-  }
+  ALL_INTENTS: [
+    'CheckWaterSpecificPlantIntent',
+    'CreatePlantIntent',
+    'DeletePlantIntent',
+    'ListPlantsIntent',
+    'WaterPlantIntent',
+    'CheckWaterPlantsTodayIntent',
+    'UpdatePlantScheduleIntent'
+  ]
 };

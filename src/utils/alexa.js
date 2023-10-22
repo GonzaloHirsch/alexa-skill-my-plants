@@ -14,55 +14,24 @@ const buildResponse = (success, payload) => {
 };
 
 /**
- * Obtains a country code from the user's device location. If the user doesn't have a location or consent for it, it returns a speaking prompt asking to complete that. If successful, the payload is the country code.
+ * Obtains a time zone from the device directly.
  * @param {*} handlerInput coming from the Alexa invocation directly.
  * @returns a response based on the `buildResponse` function. It contains `success` and `payload` properties to indicate if the operation was successful or not, and the result of it, respectively.
  */
-const getCountryCode = async (handlerInput) => {
+const getDeviceTimeZone = async (handlerInput) => {
   // Split variables
   const { requestEnvelope, serviceClientFactory, responseBuilder } =
     handlerInput;
-  // Get the consent token for the location
-  const consentToken =
-    requestEnvelope.context.System.user.permissions &&
-    requestEnvelope.context.System.user.permissions.consentToken;
-  if (!consentToken) {
-    return buildResponse(
-      false,
-      responseBuilder
-        .speak(locale.ERROR.PERMISSIONS)
-        .reprompt(locale.ERROR.PERMISSIONS)
-        .withShouldEndSession(true)
-        // This is commented out because for some reason is not working, although this is as per AWS's docs
-        // .withAskForPermissionsConsentCard(['read::alexa:device:all:address'])
-        .getResponse()
-    );
-  }
 
+  let userTimeZone;
   try {
-    // To get the address we need an address service client
+    // Get a service client for the time zone
     const { deviceId } = requestEnvelope.context.System.device;
-    const deviceAddressServiceClient =
-      serviceClientFactory.getDeviceAddressServiceClient();
+    const upsServiceClient = serviceClientFactory.getUpsServiceClient();
 
-    // Only attempt to get the country & postal code.
-    const address = await deviceAddressServiceClient.getCountryAndPostalCode(
-      deviceId
-    );
-
-    // Only intend on looking for the country code
-    // If no country, prompt user to add it
-    if (address.countryCode === null) {
-      return buildResponse(
-        false,
-        responseBuilder
-          .speak(locale.ERROR.LOCATION)
-          .reprompt(locale.ERROR.LOCATION)
-          .withShouldEndSession(true)
-          .getResponse()
-      );
-    }
-    return buildResponse(true, address.countryCode);
+    // Actually get the TZ and return it
+    userTimeZone = await upsServiceClient.getSystemTimeZone(deviceId);
+    return buildResponse(true, userTimeZone);
   } catch (error) {
     if (error.name !== 'ServiceError') {
       console.error(`Error response: ${error.message}`);
@@ -80,5 +49,5 @@ const getCountryCode = async (handlerInput) => {
 };
 
 module.exports = {
-  getCountryCode
+  getDeviceTimeZone
 };

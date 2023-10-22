@@ -1,4 +1,4 @@
-const constants = require('./constants');
+const moment = require('moment');
 const locale = require('../locales/en-GB');
 
 /**
@@ -21,31 +21,73 @@ const prepareList = (list) => {
 };
 
 /**
- * Prepares a list of movie streaming locations given the user action and the result for the movies.
- * @param {constants.ACTIONS} action that the user invoked (buy, rent, stream, etc).
- * @param {string} movie that the user requested.
- * @param {Array[String]} list of platforms to prepare.
- * @returns a prepared string for Alexa to read out loud. The format is `You can {ACTION} {MOVIE} on {LIST}`.
+ * Prepares a list of plant objects into a speakable list.
+ * @param {list[string]} list of plant objects
+ * @returns a string with the phrase for Alexa.
  */
-const prepareMovieList = (action, movie, list) => {
-  let method;
-  switch (action) {
-    case constants.ACTIONS.BUY: {
-      method = locale.ACTIONS.BUY;
-      break;
-    }
-    case constants.ACTIONS.RENT: {
-      method = locale.ACTIONS.RENT;
-      break;
-    }
-    case constants.ACTIONS.STREAM:
-    default:
-      method = locale.ACTIONS.STREAM;
-      break;
-  }
-  return locale.MOVIE.LOCATION(method, movie, prepareList(list));
+const preparePlantList = (list) => {
+  return locale.PLANTS.LIST(list.length, prepareList(list));
+};
+
+/**
+ * Prepares a phrase for Alexa given the plant name and duration.
+ * @param {string} plantName for the plant in question.
+ * @param {string} waterSchedule ISO duration for the water schedule.
+ * @returns a string with the phrase for Alexa.
+ */
+const prepareCreatedPlantResponse = (plantName, waterSchedule) => {
+  const d = moment.duration(waterSchedule);
+  return locale.PLANTS.CREATED(plantName, d.humanize());
+};
+
+/**
+ * Prepares a phrase for Alexa based on the plant name and the time of last water.
+ * @param {string} plantName for the plant in question.
+ * @param {number} lastWater timestamp for the last time the plant was watered.
+ * @param {string} waterSchedule ISO duration for the water schedule.
+ * @returns a string with the phrase for Alexa.
+ */
+const prepareLastWateredPlantResponse = (
+  plantName,
+  lastWater,
+  waterSchedule
+) => {
+  // Get a moment.js duration for representation purposes.
+  const d = moment.duration(moment(Date.now()).diff(moment(lastWater)));
+  const dSchedule = moment.duration(waterSchedule);
+  return locale.PLANTS.LAST_WATERED(
+    plantName,
+    lastWater > 0,
+    d.humanize(),
+    dSchedule.humanize()
+  );
+};
+
+/**
+ * Prepares a phrase for Alexa given the plant name and duration.
+ * @param {string} plantName for the plant in question.
+ * @param {string} waterSchedule ISO duration for the water schedule.
+ * @returns a string with the phrase for Alexa.
+ */
+const prepareUpdatedPlantResponse = (plantName, waterSchedule) => {
+  // Get a moment.js duration for representation purposes.
+  const d = moment.duration(waterSchedule);
+  return locale.PLANTS.UPDATED(plantName, d.humanize());
+};
+
+/**
+ * Prepares a phrase for Alexa given the plant list
+ * @param {list} list of plant objects.
+ * @returns a string with the phrase for Alexa.
+ */
+const prepareWaterTodayResponse = (list) => {
+  return locale.PLANTS.WATER_TODAY(list.length, prepareList(list));
 };
 
 module.exports = {
-  prepareMovieList
+  preparePlantList,
+  prepareCreatedPlantResponse,
+  prepareLastWateredPlantResponse,
+  prepareWaterTodayResponse,
+  prepareUpdatedPlantResponse
 };

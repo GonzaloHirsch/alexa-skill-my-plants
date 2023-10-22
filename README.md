@@ -1,4 +1,4 @@
-# Movie Map
+# My Plants
 
 This guide assists in the development of an Alexa skill, focusing on the given example of this skill.
 
@@ -34,7 +34,7 @@ All infrastructure is deployed using Terraform (except the IAM Users and policie
 
 These are the necessary permissions to correctly deploy the stack in a CI/CD pipeline after deploying most of the resources with an account with enough permissions. Permissions are broken down on several IAM policies for simplicity:
 
-- `policy-alexa-iam-deployer`
+- `policy-alexa-my-plants-iam-deployer`
 
 ```
 {
@@ -64,9 +64,9 @@ These are the necessary permissions to correctly deploy the stack in a CI/CD pip
                 "iam:GetRolePolicy"
             ],
             "Resource": [
-                "arn:aws:iam::REDACTED_ACCOUNT_ID:policy/policy-alexa-lambda-dynamod",
-                "arn:aws:iam::REDACTED_ACCOUNT_ID:policy/policy-alexa-lambda-execution",
-                "arn:aws:iam::REDACTED_ACCOUNT_ID:role/alexa-skill-movies-lambda-role"
+                "arn:aws:iam::REDACTED_ACCOUNT_ID:policy/policy-alexa-my-plants-lambda-dynamod",
+                "arn:aws:iam::REDACTED_ACCOUNT_ID:policy/policy-alexa-my-plants-lambda-execution",
+                "arn:aws:iam::REDACTED_ACCOUNT_ID:role/alexa-skill-my-plants-lambda-role"
             ]
         },
         {
@@ -82,7 +82,7 @@ These are the necessary permissions to correctly deploy the stack in a CI/CD pip
 }
 ```
 
-- `policy-alexa-lambda-deployer`
+- `policy-alexa-my-plants-lambda-deployer`
 
 ```
 {
@@ -107,8 +107,8 @@ These are the necessary permissions to correctly deploy the stack in a CI/CD pip
                 "lambda:GetPolicy"
             ],
             "Resource": [
-                "arn:aws:lambda:REDACTED_REGION:REDACTED_ACCOUNT_ID:function:alexa-skill-movie-stream",
-                "arn:aws:iam::REDACTED_ACCOUNT_ID:role/alexa-skill-movies-lambda-role"
+                "arn:aws:lambda:REDACTED_REGION:REDACTED_ACCOUNT_ID:function:alexa-skill-my-plants-stream",
+                "arn:aws:iam::REDACTED_ACCOUNT_ID:role/alexa-skill-my-plants-lambda-role"
             ]
         },
         {
@@ -121,7 +121,7 @@ These are the necessary permissions to correctly deploy the stack in a CI/CD pip
 }
 ```
 
-- `policy-alexa-logs-deployer`
+- `policy-alexa-my-plants-logs-deployer`
 
 ```
 {
@@ -136,7 +136,7 @@ These are the necessary permissions to correctly deploy the stack in a CI/CD pip
                 "logs:UntagLogGroup",
                 "logs:CreateLogGroup"
             ],
-            "Resource": "arn:aws:logs:REDACTED_REGION:REDACTED_ACCOUNT_ID:log-group:/aws/lambda/alexa-skill-movie-stream:*"
+            "Resource": "arn:aws:logs:REDACTED_REGION:REDACTED_ACCOUNT_ID:log-group:/aws/lambda/alexa-skill-my-plants-stream:*"
         },
         {
             "Sid": "ListPermissions",
@@ -148,45 +148,83 @@ These are the necessary permissions to correctly deploy the stack in a CI/CD pip
 }
 ```
 
-- `policy-alexa-s3-deployer`
+- `policy-alexa-my-plants-storage-deployer`
 
 Note in this case that several permissions are necessary for Terraform to interact with the backend where the state lives.
 
 ```
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "EditPermissions",
-            "Effect": "Allow",
-            "Action": [
-                "s3:PutObject",
-                "s3:GetObjectAcl",
-                "s3:GetObject",
-                "s3:PutBucketTagging",
-                "s3:ListBucket"
-            ],
-            "Resource": [
-                "arn:aws:s3:::alexa-skill-terraform-backend/*",
-                "arn:aws:s3:::alexa-skill-terraform-backend"
-            ]
-        },
-        {
-            "Sid": "GetPermissions",
-            "Effect": "Allow",
-            "Action": [
-                "s3:GetEncryptionConfiguration",
-                "s3:GetLifecycleConfiguration",
-                "s3:Get*Configuration",
-                "s3:GetAccelerateConfiguration",
-                "s3:GetBucket*"
-            ],
-            "Resource": [
-                "arn:aws:s3:::alexa-skill-terraform-backend",
-                "arn:aws:s3:REDACTED_REGION:REDACTED_ACCOUNT_ID:storage-lens/*"
-            ]
-        }
-    ]
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "DynamodGetPermissions",
+			"Effect": "Allow",
+			"Action": [
+				"dynamodb:Describe*",
+				"dynamodb:List*",
+				"dynamodb:PartiQLSelect",
+				"dynamodb:Get*",
+				"dynamodb:BatchGetItem",
+				"dynamodb:ConditionCheckItem",
+				"dynamodb:Scan",
+				"dynamodb:Query"
+			],
+			"Resource": [
+				"arn:aws:dynamodb:REDACTED_REGION:REDACTED_ACCOUNT_ID:table/alexa-skill-my-plants-table"
+			]
+		},
+		{
+			"Sid": "DynamodPutPermissions",
+			"Effect": "Allow",
+			"Action": [
+				"dynamodb:UpdateTimeToLive",
+				"dynamodb:UntagResource",
+				"dynamodb:PutItem",
+				"dynamodb:UpdateItem",
+				"dynamodb:DeleteTable",
+				"dynamodb:UpdateTableReplicaAutoScaling",
+				"dynamodb:CreateTable",
+				"dynamodb:UpdateGlobalTableSettings",
+				"dynamodb:TagResource",
+				"dynamodb:PartiQLSelect",
+				"dynamodb:UpdateGlobalTableVersion",
+				"dynamodb:UpdateTable"
+			],
+			"Resource": [
+				"arn:aws:dynamodb:REDACTED_REGION:REDACTED_ACCOUNT_ID:table/alexa-skill-my-plants-table"
+			]
+		},
+		{
+			"Sid": "PutPermissions",
+			"Effect": "Allow",
+			"Action": [
+				"s3:PutObject",
+				"s3:GetObjectAcl",
+				"s3:GetObject",
+				"s3:PutBucketTagging",
+				"s3:ListBucket"
+			],
+			"Resource": [
+				"arn:aws:s3:::alexa-skill-my-plants-terraform-backend/*",
+				"arn:aws:s3:::alexa-skill-my-plants-terraform-backend"
+			]
+		},
+		{
+			"Sid": "GetPermissions",
+			"Effect": "Allow",
+			"Action": [
+				"s3:GetEncryptionConfiguration",
+				"s3:GetLifecycleConfiguration",
+				"s3:Get*Configuration",
+				"s3:GetAccelerateConfiguration",
+				"s3:GetBucket*"
+			],
+			"Resource": [
+				"arn:aws:s3:::alexa-skill-my-plants-terraform-backend",
+				"arn:aws:s3:REDACTED_REGION:REDACTED_ACCOUNT_ID:storage-lens/*"
+			]
+		}
+	]
 }
 ```
 

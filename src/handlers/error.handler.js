@@ -1,5 +1,7 @@
+const Alexa = require('ask-sdk-core');
 const util = require('util');
 const locale = require('../locales/en-GB');
+const constants = require('../utils/constants');
 
 const ErrorHandler = {
   canHandle() {
@@ -12,9 +14,16 @@ const ErrorHandler = {
       util.inspect(handlerInput.requestEnvelope, true, null, false)
     );
 
+    // Determine the response based on the intent name
+    const response = constants.ALL_INTENTS.includes(
+      Alexa.getIntentName(handlerInput.requestEnvelope)
+    )
+      ? locale.ERROR.UNKNOWN
+      : locale.ERROR.NO_UNDERSTAND;
+
     return handlerInput.responseBuilder
-      .speak(locale.ERROR.NO_UNDERSTAND)
-      .reprompt(locale.ERROR.NO_UNDERSTAND)
+      .speak(response)
+      .reprompt(response)
       .getResponse();
   }
 };

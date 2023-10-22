@@ -1,7 +1,7 @@
 {
-  "name": "alexa-skill-movie-integrations",
-  "version": "1.2.1",
-  "description": "Source code for an Alexa skill that interacts with The Movie DB API in order to provide a service to look up stream locations based on the device country.",
+  "name": "alexa-skill-my-plants",
+  "version": "1.0.0",
+  "description": "Source code for an Alexa skill that helps you keep track of your plants and how you water them so you don't need to remember.",
   "main": "src/index.js",
   "private": true,
   "scripts": {
@@ -16,14 +16,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/GonzaloHirsch/alexa-skill-movie-integrations.git"
+    "url": "https://github.com/GonzaloHirsch/alexa-skill-my-plants.git"
   },
   "author": "Gonzalo Hirsch <hirschgonzalo@gmail.com> (https://gonzalohirsch.com)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/GonzaloHirsch/alexa-skill-movie-integrations/issues"
+    "url": "https://github.com/GonzaloHirsch/alexa-skill-my-plants/issues"
   },
-  "homepage": "https://gonzalohirsch.github.io/alexa-skill-movie-integrations/",
+  "homepage": "https://gonzalohirsch.github.io/alexa-skill-my-plants/",
   "release": {
     "branches": [
       "main"
@@ -51,8 +51,10 @@
     ]
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "3.433.0",
+    "@aws-sdk/lib-dynamodb": "3.433.0",
     "ask-sdk-core": "2.14.0",
-    "axios": "1.4.0"
+    "moment": "2.29.4"
   },
   "devDependencies": {
     "@semantic-release/changelog": "6.0.3",
