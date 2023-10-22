@@ -15,6 +15,7 @@ module.exports = {
     'DeletePlantIntent',
     'ListPlantsIntent',
     'WaterPlantIntent',
-    'CheckWaterPlantsTodayIntent'
+    'CheckWaterPlantsTodayIntent',
+    'UpdatePlantScheduleIntent'
   ]
 };
