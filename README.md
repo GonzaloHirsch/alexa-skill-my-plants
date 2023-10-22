@@ -1,4 +1,4 @@
-# Movie Map
+# My Plants
 
 This guide assists in the development of an Alexa skill, focusing on the given example of this skill.
 
