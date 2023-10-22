@@ -1,4 +1,4 @@
-# Movie Map
+# My Plants
 
 This guide assists in the development of an Alexa skill, focusing on the given example of this skill.
 
@@ -66,7 +66,7 @@ These are the necessary permissions to correctly deploy the stack in a CI/CD pip
             "Resource": [
                 "arn:aws:iam::REDACTED_ACCOUNT_ID:policy/policy-alexa-lambda-dynamod",
                 "arn:aws:iam::REDACTED_ACCOUNT_ID:policy/policy-alexa-lambda-execution",
-                "arn:aws:iam::REDACTED_ACCOUNT_ID:role/alexa-skill-movies-lambda-role"
+                "arn:aws:iam::REDACTED_ACCOUNT_ID:role/alexa-skill-my-plants-lambda-role"
             ]
         },
         {
@@ -107,8 +107,8 @@ These are the necessary permissions to correctly deploy the stack in a CI/CD pip
                 "lambda:GetPolicy"
             ],
             "Resource": [
-                "arn:aws:lambda:REDACTED_REGION:REDACTED_ACCOUNT_ID:function:alexa-skill-movie-stream",
-                "arn:aws:iam::REDACTED_ACCOUNT_ID:role/alexa-skill-movies-lambda-role"
+                "arn:aws:lambda:REDACTED_REGION:REDACTED_ACCOUNT_ID:function:alexa-skill-my-plants-stream",
+                "arn:aws:iam::REDACTED_ACCOUNT_ID:role/alexa-skill-my-plants-lambda-role"
             ]
         },
         {
@@ -136,7 +136,7 @@ These are the necessary permissions to correctly deploy the stack in a CI/CD pip
                 "logs:UntagLogGroup",
                 "logs:CreateLogGroup"
             ],
-            "Resource": "arn:aws:logs:REDACTED_REGION:REDACTED_ACCOUNT_ID:log-group:/aws/lambda/alexa-skill-movie-stream:*"
+            "Resource": "arn:aws:logs:REDACTED_REGION:REDACTED_ACCOUNT_ID:log-group:/aws/lambda/alexa-skill-my-plants-stream:*"
         },
         {
             "Sid": "ListPermissions",
