@@ -44,7 +44,7 @@ const AskCheckWaterSpecificPlantIntentHandler = {
       getPlantResponse = await getPlant(
         userId,
         plantName,
-        'UserId, PlantName, LastWater'
+        'UserId, PlantName, LastWater, Schedule'
       );
       console.debug(getPlantResponse);
     } catch (error) {
@@ -67,7 +67,8 @@ const AskCheckWaterSpecificPlantIntentHandler = {
     // Get prepared for the response.
     const speechText = prepareLastWateredPlantResponse(
       plantName,
-      getPlantResponse.Item.LastWater
+      getPlantResponse.Item.LastWater,
+      getPlantResponse.Item.Schedule
     );
     const cardText = speechText;
 

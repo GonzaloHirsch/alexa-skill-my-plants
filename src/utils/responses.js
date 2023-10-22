@@ -44,12 +44,23 @@ const prepareCreatedPlantResponse = (plantName, waterSchedule) => {
  * Prepares a phrase for Alexa based on the plant name and the time of last water.
  * @param {string} plantName for the plant in question.
  * @param {number} lastWater timestamp for the last time the plant was watered.
+ * @param {string} waterSchedule ISO duration for the water schedule.
  * @returns a string with the phrase for Alexa.
  */
-const prepareLastWateredPlantResponse = (plantName, lastWater) => {
+const prepareLastWateredPlantResponse = (
+  plantName,
+  lastWater,
+  waterSchedule
+) => {
   // Get a moment.js duration for representation purposes.
   const d = moment.duration(moment(Date.now()).diff(moment(lastWater)));
-  return locale.PLANTS.LAST_WATERED(plantName, lastWater > 0, d.humanize());
+  const dSchedule = moment.duration(waterSchedule);
+  return locale.PLANTS.LAST_WATERED(
+    plantName,
+    lastWater > 0,
+    d.humanize(),
+    dSchedule.humanize()
+  );
 };
 
 /**

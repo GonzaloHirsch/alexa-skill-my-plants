@@ -12,16 +12,17 @@ module.exports = {
         ? ` The ${amount === 1 ? 'name is ' : 'names are '}${list}.`
         : ''),
     CREATED: (plantName, waterSchedule) =>
-      `I created a new plant called ${plantName}. You should water it once or every ${waterSchedule}.`,
+      `I created a new plant called ${plantName}. You should water it roughly once or every ${waterSchedule}.`,
     DELETED: (plantName) => `I deleted the plant called ${plantName}.`,
     WATERED: (plantName) =>
       `I marked the plant ${plantName} as watered just now.`,
     UPDATED: (plantName, waterSchedule) =>
-      `I updated the watering schedule for ${plantName} to be once or every ${waterSchedule}.`,
-    LAST_WATERED: (plantName, hasWatered, lastWater) =>
-      hasWatered
+      `I updated the watering schedule for ${plantName} to be roughly once or every ${waterSchedule}.`,
+    LAST_WATERED: (plantName, hasWatered, lastWater, waterSchedule) =>
+      (hasWatered
         ? `Looks like you watered ${plantName} roughly ${lastWater} ago.`
-        : `It seems like you haven't watered ${plantName}.`,
+        : `It seems like you haven't watered ${plantName}.`) +
+      ` You have to water it roughly once or every ${waterSchedule}.`,
     DELETED_NO_EXIST: (plantName) =>
       `I couldn't delete the plant called ${plantName} because it doesn't exist.`,
     WATER_TODAY: (amount, list) =>
@@ -64,6 +65,6 @@ module.exports = {
     DUPLICATE_PLANT_NAME: (name) =>
       `Sorry, it seems like you already have registered a plant called ${name}. You can create another with a different name.`,
     INVALID_PLANT_NAME: (name) =>
-      `Ops! Looks like the plant ${name} doesn't exist. Are you sure it's the right name?`
+      `Oops! Looks like the plant ${name} doesn't exist. Are you sure it's the right name?`
   }
 };
