@@ -19,7 +19,7 @@ resource "aws_iam_role" "default" {
   managed_policy_arns = [aws_iam_policy.dynamo_db.arn, aws_iam_policy.logs.arn]
   tags = {
     Name = local.role_name
-    app  = "movie-map.alexa.gonzalohirsch.com"
+    app  = local.app_tag
   }
 }
 
@@ -37,6 +37,7 @@ resource "aws_iam_policy" "dynamo_db" {
           "dynamodb:GetItem",
           "dynamodb:PutItem",
           "dynamodb:Scan",
+          "dynamodb:Query",
           "dynamodb:UpdateItem"
         ],
         "Resource" : "arn:aws:dynamodb:${var.region}:${var.account_id}:table/*"
@@ -46,7 +47,7 @@ resource "aws_iam_policy" "dynamo_db" {
 
   tags = {
     Name = local.policy_dynamo_name
-    app  = "movie-map.alexa.gonzalohirsch.com"
+    app  = local.app_tag
   }
 }
 
@@ -76,6 +77,6 @@ resource "aws_iam_policy" "logs" {
 
   tags = {
     Name = local.policy_logs_name
-    app  = "movie-map.alexa.gonzalohirsch.com"
+    app  = local.app_tag
   }
 }

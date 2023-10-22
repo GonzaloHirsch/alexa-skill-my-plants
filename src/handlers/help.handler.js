@@ -10,7 +10,7 @@ const HelpIntentHandler = {
   },
   handle(handlerInput) {
     const speechText = locale.HELP;
-    const cardText = speechText;
+    const cardText = locale.HELP_AGAIN;
 
     return handlerInput.responseBuilder
       .speak(speechText)

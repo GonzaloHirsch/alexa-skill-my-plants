@@ -3,10 +3,14 @@ const ErrorHandler = require('./error.handler');
 const HelpIntentHandler = require('./help.handler');
 const LaunchRequestHandler = require('./launch.handler');
 const SessionEndedRequestHandler = require('./sessionEnded.handler');
-const AskStreamLocationIntentHandler = require('./streamLocation.handler');
-const AskBuyLocationIntentHandler = require('./buyLocation.handler');
-const AskRentLocationIntentHandler = require('./rentLocation.handler');
-const AskRandomMovieIntentHandler = require('./getRandomMovie.handler');
+// Custom handlers
+const AskListPlantsIntentHandler = require('./listPlants.handler');
+const AskCreatePlantIntentHandler = require('./createPlant.handler');
+const AskDeletePlantIntentHandler = require('./deletePlant.handler');
+const AskWaterPlantIntentHandler = require('./waterPlant.handler');
+const AskCheckWaterSpecificPlantIntentHandler = require('./checkWaterSpecificPlant.handler');
+const AskCheckWaterPlantsTodayIntentHandler = require('./checkWaterPlantsToday.handler');
+const AskUpdatePlantScheduleIntentHandler = require('./updatePlantSchedule.handler');
 
 module.exports = {
   CancelAndStopIntentHandler,
@@ -14,8 +18,12 @@ module.exports = {
   HelpIntentHandler,
   LaunchRequestHandler,
   SessionEndedRequestHandler,
-  AskStreamLocationIntentHandler,
-  AskBuyLocationIntentHandler,
-  AskRentLocationIntentHandler,
-  AskRandomMovieIntentHandler
+  // Custom handlers
+  AskListPlantsIntentHandler,
+  AskCreatePlantIntentHandler,
+  AskDeletePlantIntentHandler,
+  AskWaterPlantIntentHandler,
+  AskCheckWaterSpecificPlantIntentHandler,
+  AskCheckWaterPlantsTodayIntentHandler,
+  AskUpdatePlantScheduleIntentHandler
 };
