@@ -107,7 +107,7 @@ These are the necessary permissions to correctly deploy the stack in a CI/CD pip
                 "lambda:GetPolicy"
             ],
             "Resource": [
-                "arn:aws:lambda:REDACTED_REGION:REDACTED_ACCOUNT_ID:function:alexa-skill-my-plants-stream",
+                "arn:aws:lambda:REDACTED_REGION:REDACTED_ACCOUNT_ID:function:alexa-skill-my-plants",
                 "arn:aws:iam::REDACTED_ACCOUNT_ID:role/alexa-skill-my-plants-lambda-role"
             ]
         },
@@ -136,7 +136,7 @@ These are the necessary permissions to correctly deploy the stack in a CI/CD pip
                 "logs:UntagLogGroup",
                 "logs:CreateLogGroup"
             ],
-            "Resource": "arn:aws:logs:REDACTED_REGION:REDACTED_ACCOUNT_ID:log-group:/aws/lambda/alexa-skill-my-plants-stream:*"
+            "Resource": "arn:aws:logs:REDACTED_REGION:REDACTED_ACCOUNT_ID:log-group:/aws/lambda/alexa-skill-my-plants:*"
         },
         {
             "Sid": "ListPermissions",
