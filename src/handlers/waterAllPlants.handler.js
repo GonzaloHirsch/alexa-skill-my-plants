@@ -24,6 +24,11 @@ const AskWaterAllPlantsIntentHandler = {
     // User ID should always be present, so no need to check for it.
     const userId = Alexa.getUserId(handlerInput.requestEnvelope);
 
+    // Get the time zone.
+    const deviceTimeZoneResponse = await getDeviceTimeZone(handlerInput);
+    if (!deviceTimeZoneResponse.success) return deviceTimeZoneResponse.payload;
+    const deviceTimeZone = deviceTimeZoneResponse.payload;
+
     // Get all the plants for the user.
     const plantsListResponse = await listAllPlants(
       userId,
