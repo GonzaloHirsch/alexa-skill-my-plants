@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/GonzaloHirsch/alexa-skill-my-plants/compare/v1.1.2...v1.1.3) (2025-02-17)
+
+
+### Bug Fixes
+
+* missing moment import ([00f6b0e](https://github.com/GonzaloHirsch/alexa-skill-my-plants/commit/00f6b0eb2e14ac9eeed7309dc010ea7bc9e2e8d0))
+
 ## [1.1.2](https://github.com/GonzaloHirsch/alexa-skill-my-plants/compare/v1.1.1...v1.1.2) (2025-02-17)
 
 
