@@ -4,6 +4,7 @@ const util = require('util');
 const locale = require('../locales/en-GB');
 const { prepareWaterAllTodayResponse } = require('../utils/responses');
 const { getDeviceTimeZone } = require('../utils/alexa');
+const moment = require('moment');
 
 const AskWaterAllPlantsIntentHandler = {
   canHandle(handlerInput) {
