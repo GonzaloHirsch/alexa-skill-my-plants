@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/GonzaloHirsch/alexa-skill-my-plants/compare/v1.1.0...v1.1.1) (2025-02-17)
+
+
+### Bug Fixes
+
+* missing devicetz declaration ([cc656d3](https://github.com/GonzaloHirsch/alexa-skill-my-plants/commit/cc656d338aee12893ba6799ce804c8aa69fb8d24))
+
 # [1.1.0](https://github.com/GonzaloHirsch/alexa-skill-my-plants/compare/v1.0.0...v1.1.0) (2025-02-17)
 
 
