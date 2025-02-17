@@ -84,10 +84,20 @@ const prepareWaterTodayResponse = (list) => {
   return locale.PLANTS.WATER_TODAY(list.length, prepareList(list));
 };
 
+/**
+ * Prepares a phrase for Alexa given the plant list
+ * @param {list} list of plant objects.
+ * @returns a string with the phrase for Alexa.
+ */
+const prepareWaterAllTodayResponse = (list) => {
+  return locale.PLANTS.WATER_ALL(list.length, prepareList(list));
+};
+
 module.exports = {
   preparePlantList,
   prepareCreatedPlantResponse,
   prepareLastWateredPlantResponse,
   prepareWaterTodayResponse,
+  prepareWaterAllTodayResponse,
   prepareUpdatedPlantResponse
 };

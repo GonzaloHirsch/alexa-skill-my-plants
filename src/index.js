@@ -10,6 +10,7 @@ const {
   AskCreatePlantIntentHandler,
   AskDeletePlantIntentHandler,
   AskWaterPlantIntentHandler,
+  AskWaterAllPlantsIntentHandler,
   AskCheckWaterSpecificPlantIntentHandler,
   AskCheckWaterPlantsTodayIntentHandler,
   AskUpdatePlantScheduleIntentHandler
@@ -26,6 +27,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     AskCreatePlantIntentHandler,
     AskDeletePlantIntentHandler,
     AskWaterPlantIntentHandler,
+    AskWaterAllPlantsIntentHandler,
     AskCheckWaterSpecificPlantIntentHandler,
     AskCheckWaterPlantsTodayIntentHandler,
     AskUpdatePlantScheduleIntentHandler

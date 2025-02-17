@@ -28,7 +28,11 @@ module.exports = {
     WATER_TODAY: (amount, list) =>
       // eslint-disable-next-line prettier/prettier
       amount > 0 ? `You need to water ${amount} ${amount === 1 ? 'plant' : 'plants'} today! The ${amount === 1 ? 'name is' : 'names are'} ${list}.`
-        : `You don't have to water your plants today!`
+        : `You don't have to water your plants today!`,
+    WATER_ALL: (amount, list) =>
+      // eslint-disable-next-line prettier/prettier
+      amount > 0 ? `You marked ${amount} ${amount === 1 ? 'plant' : 'plants'} as watered today! The ${amount === 1 ? 'name is' : 'names are'} ${list}.`
+        : `You don't have to water any of your plants today!`
   },
   CONFIRMATION: {
     ACCEPT: [
