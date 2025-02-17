@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/GonzaloHirsch/alexa-skill-my-plants/compare/v1.1.1...v1.1.2) (2025-02-17)
+
+
+### Bug Fixes
+
+* missing import for devicetz ([bdf5c28](https://github.com/GonzaloHirsch/alexa-skill-my-plants/commit/bdf5c28a7436dcc025daf1d547cfe0c27a80f34f))
+
 ## [1.1.1](https://github.com/GonzaloHirsch/alexa-skill-my-plants/compare/v1.1.0...v1.1.1) (2025-02-17)
 
 
